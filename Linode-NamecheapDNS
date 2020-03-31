@@ -1,0 +1,42 @@
+Namecheap Private Email records for domains with third-party DNS
+
+If you have your domain name registered elsewhere or using third-party DNS, you will need to contact your DNS provider and have Private Email DNS records set up in the domain name zone file. 
+
+Below you can see the list of the essential records to be created: 
+
+
+Hostname	Record Type	Priority	Value
+@	MX	10	mx1.privateemail.com
+@	MX	10	mx2.privateemail.com
+@	TXT	
+v=spf1 include:spf.privateemail.com ~all
+
+
+And in this table you can find the additional records (they will not affect email delivery itself and can be skipped): 
+
+Hostname	Record Type	Value
+mail	CNAME	privateemail.com
+autodiscover	CNAME	privateemail.com
+autoconfig	CNAME	privateemail.com
+
+
+Service	Protocol	Record Type	Priority	Weight	Port	Value
+_autodiscover	_tcp	SRV	0	0	443	privateemail.com
+
+
+NOTE: @ stands for yourdomain.com; mail, autodiscover and autoconfig stand for sub-domains mail.yourdomain.com, autodiscover.yourdomain.com and autoconfig.yourdomain.com correspondingly. 
+
+
+What these records are needed for?
+
+MX record (mail exchange record), is an entry in the Domain Name System that identifies the mail server that is responsible for handling e-mails for that domain name. 
+
+CNAME record (canonical name record) is a type of resource record in the Domain Name System (DNS) used to specify that a domain name is an alias for another domain, the 'canonical' domain. All information, including subdomains, IP addresses, etc., are defined by the canonical domain. 
+
+TXT record (text record) is a type of resource record in the Domain Name System (DNS) used to provide the ability to associate some arbitrary and unformatted text with a host or other name, such as human-readable information about a server, network, data center, and other accounting information. 
+
+SRV record (service record) is a specification of data in the Domain Name System defining the location, i.e. the hostname and port number, of servers for specified services. 
+
+Allow up to 30 minutes for the records to propagate and check the work of your mail service.
+
+Once done, do not forget to create the email box as shown here < https://www.namecheap.com/support/knowledgebase/article.aspx/1049/93/how-do-i-create-openxchange-user-accounts >
